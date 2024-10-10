@@ -16,26 +16,26 @@ public class GameController implements GameApi {
 
     @Override
     public ResponseEntity<Object> getGames(){
-        Object gameRequestedList = this.gameService.getAllGames();
+        var gameRequestedList = this.gameService.getAllGames();
         return ResponseEntity.ok(gameRequestedList);
     }
 
     @Override
     public ResponseEntity<Game> saveGame(@RequestBody Game game){
-        Game gameCreated = this.gameService.saveGame(game);
+        var gameCreated = this.gameService.saveGame(game);
         return ResponseEntity.ok(gameCreated);
     }
 
     @Override
     public ResponseEntity<Game> getGameByID(String id) {
-        Long gameID = Long.parseLong(id);
-        Game gameRequested = this.gameService.getGameByID(gameID);
+        var gameID = Long.parseLong(id);
+        var gameRequested = this.gameService.getGameByID(gameID);
         return ResponseEntity.ok(gameRequested);
     }
 
     @Override
     public ResponseEntity<Game> updateGame(@RequestBody Game updatedGame) {
-        Game game = this.gameService.updateGame(updatedGame);
+        var game = this.gameService.updateGame(updatedGame);
         return ResponseEntity.ok(game);
     }
 

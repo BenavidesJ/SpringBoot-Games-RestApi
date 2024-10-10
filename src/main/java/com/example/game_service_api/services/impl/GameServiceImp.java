@@ -19,38 +19,25 @@ public class GameServiceImp implements GameService {
 
     @Override
     public Game saveGame(Game gameRequest) {
-        Game gameCreatedInDB = this.gameRepository.save(gameRequest);
-        return gameCreatedInDB;
+        return this.gameRepository.save(gameRequest);
     }
 
     @Override
     public Game getGameByID(Long id) {
-        Game gameFoundInDB = this.gameRepository.findById(id).orElseThrow(
-                () -> new GameException(HttpStatus.NOT_FOUND,"Game with id: " + id + " not found!")
-        );
-        return gameFoundInDB;
+        return this.gameRepository
+                .findById(id)
+                .orElseThrow(() -> new GameException(HttpStatus.NOT_FOUND,"Game with id: " + id + " not found!"));
     }
     @Override
     public List<Game> getAllGames() {
-        List<Game> games = this.gameRepository.findAll();
-        return games;
+        return this.gameRepository.findAll();
     }
     @Override
     public Game updateGame(Game updatedGame) {
-        Long gameToUpdateID = updatedGame.getId();
-        if (!this.gameRepository.existsById(gameToUpdateID)){
-            throw new GameException(HttpStatus.NOT_FOUND,"Game with id: " + gameToUpdateID + " not found!");
-        }
-
         return this.gameRepository.save(updatedGame);
     }
     @Override
     public void deleteGame(Long id) {
-        Boolean gameToDeleteID = this.gameRepository.existsById(id);
-        if (!gameToDeleteID) {
-            throw new GameException(HttpStatus.NOT_FOUND,"Game with id: " + id + " not found!");
-        }
-
         this.gameRepository.deleteById(id);
     }
 
